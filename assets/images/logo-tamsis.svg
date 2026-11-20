@@ -1,0 +1,7 @@
+<!-- TODO: placeholder sementara — ganti dengan logo resmi SMK Tamansiswa Jetis (logo-tamsis.png) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="16" fill="#16523A"/>
+  <path d="M24 22 L14 32 L24 42" stroke="#D8F3E5" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M40 22 L50 32 L40 42" stroke="#D8F3E5" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M35 18 L29 46" stroke="#34D399" stroke-width="5" stroke-linecap="round"/>
+</svg>

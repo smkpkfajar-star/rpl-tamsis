@@ -1,0 +1,9 @@
+# Cursor / AI Vibecoding Rules - Portal RPL SMK Tamansiswa Jetis
+
+1. **Referensi Utama:** Selalu ikuti spesifikasi dari `docs/PRD.md`, `docs/DESIGN.md`, `docs/TECH_SPEC.md`, `docs/CONTENT.md`, dan `docs/STRUCTURE.md`.
+2. **Identitas Visual:** Gaya monokrom bergaris (bingkai, sel grid 1px, penanda "+", mode terang/gelap lewat variabel CSS). Warna hanya untuk makna: 4 tema lajur branch (`.theme-web/python/game/git`), emas `#F2B53A` untuk game/merge, Emerald `#16523A` untuk identitas. Ikuti `docs/DESIGN.md`. Jangan memakai logo/aset merek perusahaan lain.
+3. **Tipografi:** Gunakan `Geist` untuk semua teks, `Geist Mono` hanya untuk kode sungguhan (terminal, hash, nama branch), dan `Press Start 2P` hanya untuk judul game.
+4. **Konten Autentik:** Gunakan naskah Bahasa Indonesia dari `docs/CONTENT.md`. DILARANG keras memakai Lorem Ipsum atau data fiktif generik.
+5. **Arsitektur Modular:** Pisahkan seluruh data dinamis (kurikulum, proyek siswa, karir, FAQ) ke `js/data.js` dan render melalui `js/main.js`.
+6. **Integrasi WhatsApp Standar:** Gunakan format link `https://wa.me/628xxxxxxxxxx?text=...` dengan pesan teks biasa (bukan fitur interaktif WA Business).
+7. **Karya Unggulan:** Wajib menonjolkan game edukasi Git `GITHUB: TEAM COLLAPSE` (`https://rpl.tamsis.site/`) dengan tombol langsung mainkan di browser (`target="_blank" rel="noopener noreferrer"`).

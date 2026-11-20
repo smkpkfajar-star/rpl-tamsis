@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RPL / PPLG — SMK Tamansiswa Jetis Yogyakarta</title>
+  <meta name="description" content="Konsentrasi Keahlian Rekayasa Perangkat Lunak (RPL / PPLG) SMK Tamansiswa Jetis Yogyakarta. Belajar web full-stack, Python, game edukasi, dan alur kerja Git standar industri." />
+  <meta name="theme-color" content="#16523A" />
+  <link rel="icon" type="image/svg+xml" href="./assets/icons/favicon.svg" />
+
+  <!-- Tema: ikuti pilihan tersimpan, kalau tidak ada ikuti sistem -->
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('theme'); } catch (e) {}
+      var dark = t === 'dark' || ((!t || t === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      document.documentElement.classList.add('js');
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Press+Start+2P&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            fg: 'var(--fg)',
+            muted: 'var(--muted)',
+            base: 'var(--bg)',
+            base2: 'var(--bg2)',
+            line: 'var(--line)',
+            line2: 'var(--line2)',
+            gold: { DEFAULT: '#F2B53A', dark: '#C98E12' },
+            brand: { DEFAULT: '#16523A', deep: '#0F3B29', mint: '#D8F3E5' },
+          },
+          fontFamily: {
+            sans: ['Geist', 'system-ui', 'sans-serif'],
+            mono: ['"Geist Mono"', 'ui-monospace', 'monospace'],
+            pixel: ['"Press Start 2P"', 'monospace'],
+          },
+        },
+      },
+    };
+  </script>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body class="font-sans antialiased">
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-3 focus:top-3 focus:z-[100] focus:rounded-full focus:bg-base focus:px-4 focus:py-2">Lewati ke konten</a>
+
+  <!-- ================= NAVBAR ================= -->
+  <header class="sticky top-0 z-50 border-b border-line bg-base/80 backdrop-blur-md" style="background: color-mix(in srgb, var(--bg) 82%, transparent)">
+    <nav class="mx-auto flex h-16 max-w-[1080px] items-center justify-between gap-4 px-4 sm:px-6" aria-label="Navigasi utama">
+      <div class="flex min-w-0 items-center gap-6">
+        <a href="#beranda" class="flex min-w-0 items-center gap-2.5">
+          <img src="./assets/images/logo-tamsis.svg" alt="Logo SMK Tamansiswa Jetis" class="h-8 w-8 shrink-0" width="32" height="32" />
+          <span class="truncate text-[15px] font-semibold tracking-tight">Tamansiswa Jetis <span class="text-muted">/</span> RPL</span>
+        </a>
+        <ul id="nav-links" class="hidden items-center gap-0.5 lg:flex"></ul>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="theme-toggle" type="button" class="hidden h-9 w-9 items-center justify-center rounded-full text-muted hover:bg-base2 hover:text-fg sm:inline-flex" aria-label="Ganti tema terang/gelap">
+          <i data-lucide="sun-moon" class="h-[18px] w-[18px]"></i>
+        </button>
+        <a data-wa="konsultasi" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-ghost hidden h-9 px-4 text-sm md:inline-flex">Konsultasi</a>
+        <a data-wa="spmb" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary hidden h-9 px-4 text-sm sm:inline-flex">Daftar SPMB</a>
+        <button id="menu-open" type="button" class="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-base2 lg:hidden" aria-label="Buka menu navigasi" aria-controls="mobile-drawer" aria-expanded="false">
+          <i data-lucide="menu" class="h-5 w-5"></i>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Mobile drawer -->
+  <div id="drawer-backdrop" class="fixed inset-0 z-[60] hidden bg-black/40 opacity-0 transition-opacity duration-300 lg:hidden"></div>
+  <aside id="mobile-drawer" class="fixed right-0 top-0 z-[70] flex h-full w-[min(20rem,85vw)] translate-x-full flex-col border-l border-line bg-base transition-transform duration-300 lg:hidden" role="dialog" aria-modal="true" aria-label="Menu navigasi" aria-hidden="true">
+    <div class="flex h-16 items-center justify-between border-b border-line px-5">
+      <span class="font-semibold">Menu</span>
+      <button id="menu-close" type="button" class="inline-flex h-9 w-9 items-center justify-center rounded-full hover:bg-base2" aria-label="Tutup menu navigasi">
+        <i data-lucide="x" class="h-5 w-5"></i>
+      </button>
+    </div>
+    <ul id="drawer-links" class="flex-1 overflow-y-auto px-5 py-2"></ul>
+    <div class="space-y-2 border-t border-line p-5">
+      <a data-wa="spmb" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary h-11 w-full">Daftar SPMB</a>
+      <a data-wa="konsultasi" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-ghost h-11 w-full">Konsultasi lewat WhatsApp</a>
+    </div>
+  </aside>
+
+  <main id="main">
+    <!-- ================= HERO ================= -->
+    <section id="beranda" class="band">
+      <div class="frame overflow-hidden">
+        <div class="hero-glow" aria-hidden="true"></div>
+        <div class="hero-in dots relative px-5 pb-16 pt-16 text-center md:pb-24 md:pt-24">
+          <a id="hero-pill" href="#" target="_blank" rel="noopener noreferrer" class="pill-link">
+            <span id="hero-pill-text"></span>
+            <span class="arrow"><i data-lucide="arrow-up-right" class="h-3.5 w-3.5"></i></span>
+          </a>
+          <h1 id="hero-headline" class="display mx-auto mt-7 max-w-4xl"></h1>
+          <p id="hero-subheadline" class="lead mx-auto mt-6 max-w-2xl"></p>
+          <div class="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+            <a id="hero-cta-game" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary h-12 px-6">
+              <i data-lucide="gamepad-2" class="h-[18px] w-[18px]"></i><span></span>
+            </a>
+            <a id="hero-cta-wa" data-wa="spmb" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-ghost h-12 px-6"><span></span></a>
+          </div>
+          <p id="hero-kicker" class="mt-8 text-sm text-muted"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Terminal + grafik branch -->
+    <section class="band">
+      <div class="frame">
+        <div class="cells grid-cols-1 lg:grid-cols-2">
+          <div class="terminal">
+            <div class="flex items-center gap-2 border-b border-[#222] px-5 py-3">
+              <span class="h-2.5 w-2.5 rounded-full bg-[#333]"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-[#333]"></span>
+              <span class="h-2.5 w-2.5 rounded-full bg-gold"></span>
+              <span class="ml-2 font-mono text-xs text-[#8f8f8f]">~/rpl-tamsis</span>
+            </div>
+            <div id="term-log" class="term-log px-5 pt-4 font-mono text-[13px] leading-[1.8]" role="log" aria-live="polite" aria-label="Keluaran terminal"></div>
+            <form id="term-form" class="flex items-center gap-2 px-5 pb-4 pt-1 font-mono text-[13px]" autocomplete="off">
+              <label for="term-input" class="t-prompt">$</label>
+              <input id="term-input" type="text" spellcheck="false" autocapitalize="off" class="term-input min-w-0 flex-1 bg-transparent text-[#ededed] placeholder:text-[#5c5c5c]" placeholder="ketik perintah, misal: bantuan" aria-label="Ketik perintah terminal" />
+            </form>
+            <div id="term-chips" class="flex flex-wrap gap-2 border-t border-[#222] px-5 py-4" aria-label="Perintah cepat"></div>
+          </div>
+          <div class="relative flex flex-col justify-between gap-6 p-5 md:p-8">
+            <div>
+              <p class="h3">Belajar seperti tim developer sungguhan</p>
+              <p class="mt-2 text-[15px] text-muted">Empat bidang dikerjakan di branch masing-masing, lalu digabung jadi satu bekal kerja.</p>
+            </div>
+            <div id="hero-graph" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Empat bidang -->
+    <section class="band">
+      <div class="frame">
+        <div id="hero-branches" class="cells grid-cols-2 md:grid-cols-4"></div>
+      </div>
+    </section>
+
+    <!-- ================= PERJALANAN ================= -->
+    <section id="perjalanan" class="band">
+      <div class="frame">
+        <div class="cells grid-cols-1">
+          <div class="pad">
+            <h2 class="heading max-w-xl">Dari belum bisa coding sampai siap kerja</h2>
+            <p class="lead mt-4">Tiga tahun di RPL dicatat seperti riwayat commit di Git. Klik tiap commit untuk melihat isinya.</p>
+          </div>
+          <div class="cells grid-cols-1 lg:grid-cols-12">
+            <div class="p-4 md:p-6 lg:col-span-5"><div id="log-list" class="log-list" role="tablist" aria-label="Riwayat perjalanan siswa"></div></div>
+            <div id="log-panel" class="lg:col-span-7" role="tabpanel"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= KEAHLIAN ================= -->
+    <section id="keahlian" class="band theme-web">
+      <div class="frame">
+        <div class="cells grid-cols-1">
+          <div class="pad pb-6 md:pb-8">
+            <h2 class="heading max-w-xl">Pindah branch, coba kodenya</h2>
+            <p class="lead mt-4">Empat bidang keahlian dari Kelas X sampai XII. Pilih satu, baca contoh kodenya, lalu tekan Jalankan.</p>
+          </div>
+          <div class="px-3 md:px-9"><div id="branch-tabs" class="utabs border-b-0" role="tablist" aria-label="Bidang keahlian"></div></div>
+          <div id="branch-panel" role="tabpanel"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= KUIS ================= -->
+    <section id="kuis" class="band">
+      <div class="frame">
+        <div class="dots px-4 py-16 md:py-24">
+          <div id="quiz" class="mx-auto max-w-2xl"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= BERITA: scroll horizontal ================= -->
+    <section id="berita" class="band" aria-labelledby="berita-title">
+      <div class="frame">
+        <div class="cells grid-cols-1">
+          <div class="pad flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <div>
+              <h2 id="berita-title" class="heading">Kabar terbaru dari RPL</h2>
+              <p class="lead mt-4">Karya, aplikasi, dan info seputar jurusan. Geser ke samping untuk melihat lainnya.</p>
+            </div>
+            <div class="flex shrink-0 items-center gap-3">
+              <span id="news-count" class="font-mono text-xs text-muted" aria-live="polite"></span>
+              <button id="news-prev" type="button" class="btn btn-ghost h-10 w-10" aria-label="Geser ke berita sebelumnya" aria-controls="news-track"><i data-lucide="chevron-left" class="h-4 w-4"></i></button>
+              <button id="news-next" type="button" class="btn btn-ghost h-10 w-10" aria-label="Geser ke berita berikutnya" aria-controls="news-track"><i data-lucide="chevron-right" class="h-4 w-4"></i></button>
+            </div>
+          </div>
+          <div id="news-wrap" class="news-wrap at-start">
+            <div id="news-track" class="news-track" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Daftar berita RPL, gunakan panah kiri dan kanan untuk menggeser"></div>
+            <div class="news-progress" aria-hidden="true"><span id="news-bar"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= KARYA LAIN ================= -->
+    <section id="karya" class="band" aria-labelledby="karya-lain-title">
+      <div class="frame">
+        <div class="cells grid-cols-1">
+          <div class="pad flex flex-col justify-between gap-6 md:flex-row md:items-end">
+            <h2 id="karya-lain-title" class="heading max-w-md">Karya dan aplikasi buatan RPL</h2>
+            <div id="project-filters" class="segmented self-start md:self-auto" role="group" aria-label="Filter kategori karya"></div>
+          </div>
+          <div id="project-grid" class="cells grid-cols-1 md:grid-cols-3"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= PKL ================= -->
+    <section id="pkl" class="band">
+      <div class="frame">
+        <div class="cells grid-cols-1">
+          <div class="pad">
+            <h2 class="heading">Praktik Kerja Lapangan</h2>
+            <p class="lead mt-4">Siswa menerapkan keterampilannya langsung di dunia usaha dan dunia industri (DUDI), lalu menyusun laporan PKL secara terstruktur.</p>
+          </div>
+          <div id="pkl-stepper"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= KARIR ================= -->
+    <section id="karir" class="band">
+      <div class="frame">
+        <div class="cells grid-cols-1">
+          <div class="pad">
+            <h2 class="heading">Setelah lulus, pilih jalanmu</h2>
+            <p class="lead mt-4">Keterampilan RPL bisa langsung dipakai bekerja, dijadikan usaha, atau jadi bekal kuliah.</p>
+          </div>
+          <div id="careers" class="cells grid-cols-1 md:grid-cols-3"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FAQ ================= -->
+    <section id="faq" class="band">
+      <div class="frame">
+        <div class="cells grid-cols-1 lg:grid-cols-12">
+          <div class="pad lg:col-span-5">
+            <h2 class="heading">Yang sering ditanyakan</h2>
+            <p class="lead mt-4">Pertanyaan dari calon siswa dan orang tua saat memilih jurusan.</p>
+          </div>
+          <div id="faq-list" class="px-5 py-4 md:px-10 md:py-8 lg:col-span-7"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CTA ================= -->
+    <section id="spmb" class="band">
+      <div class="frame overflow-hidden">
+        <div class="hero-glow" aria-hidden="true"></div>
+        <div class="dots relative px-5 py-20 text-center md:py-28">
+          <h2 class="display mx-auto max-w-3xl" style="font-size:clamp(2rem,4.6vw,3.4rem)">Masih ragu? Ngobrol dulu sebelum daftar.</h2>
+          <p class="lead mx-auto mt-5">Admin dan guru RPL siap menjawab soal jadwal, syarat, dan alur pendaftaran SPMB, untuk calon siswa maupun orang tua.</p>
+          <div class="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
+            <a data-wa="konsultasi" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary h-12 px-6"><i data-lucide="message-circle" class="h-[18px] w-[18px]"></i> Chat admin RPL</a>
+            <a id="cta-main-portal" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-ghost h-12 px-6">Buka portal tamsis.site</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="frame">
+      <div class="grid grid-cols-1 gap-10 px-5 py-14 md:grid-cols-4 md:px-12">
+        <div class="md:col-span-2">
+          <div class="flex items-center gap-2.5">
+            <img src="./assets/images/logo-tamsis.svg" alt="" class="h-8 w-8" width="32" height="32" />
+            <p class="font-semibold tracking-tight">SMK Tamansiswa Jetis</p>
+          </div>
+          <p class="mt-1 text-sm text-muted">Rekayasa Perangkat Lunak / PPLG</p>
+          <address id="footer-address" class="mt-5 max-w-xs text-sm not-italic leading-relaxed text-muted"></address>
+        </div>
+        <div>
+          <p class="text-sm font-medium">Jurusan lain</p>
+          <ul id="footer-departments" class="mt-4 space-y-2.5 text-sm"></ul>
+        </div>
+        <div>
+          <p class="text-sm font-medium">Tautan</p>
+          <ul id="footer-links" class="mt-4 space-y-2.5 text-sm"></ul>
+        </div>
+      </div>
+      <div class="flex flex-col items-start justify-between gap-4 border-t border-line px-5 py-5 sm:flex-row sm:items-center md:px-12">
+        <p class="text-sm text-muted">&copy; <span id="year"></span> RPL SMK Tamansiswa Jetis Yogyakarta, bagian dari <a id="footer-portal" href="#" target="_blank" rel="noopener noreferrer" class="text-fg underline-offset-4 hover:underline">tamsis.site</a></p>
+        <div id="theme-switch" class="theme-switch" role="group" aria-label="Pilih tema tampilan">
+          <button type="button" data-theme-choice="system" aria-label="Ikuti sistem"><i data-lucide="monitor" class="h-4 w-4"></i></button>
+          <button type="button" data-theme-choice="light" aria-label="Tema terang"><i data-lucide="sun" class="h-4 w-4"></i></button>
+          <button type="button" data-theme-choice="dark" aria-label="Tema gelap"><i data-lucide="moon" class="h-4 w-4"></i></button>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Tombol WhatsApp cepat (hanya di layar kecil) -->
+  <a data-wa="konsultasi" href="#" target="_blank" rel="noopener noreferrer" aria-label="Konsultasi lewat WhatsApp"
+     class="btn btn-primary fixed bottom-4 right-4 z-40 h-14 w-14 shadow-lg lg:hidden">
+    <i data-lucide="message-circle" class="h-6 w-6"></i>
+  </a>
+
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <script src="./js/data.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>

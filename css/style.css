@@ -1,0 +1,379 @@
+/* Custom styling — RPL SMK Tamansiswa Jetis
+ * Gaya: monokrom bergaris (frame + sel grid + penanda "+"), font Geist,
+ * mode terang/gelap, dengan aksen 4 warna lajur branch & emas pixel-art.
+ */
+
+/* ================= Token warna (terang / gelap) ================= */
+:root {
+  --bg: #ffffff;
+  --bg2: #fafafa;
+  --fg: #171717;
+  --muted: #666666;
+  --line: #eaeaea;
+  --line2: #d4d4d4;
+  --btn-bg: #171717;
+  --btn-fg: #ffffff;
+  --code-bg: #0a0a0a;
+  --code-fg: #ededed;
+  --code-muted: #8f8f8f;
+  --brand: #16523a;
+  --brand-deep: #0f3b29;
+  --brand-mint: #d8f3e5;
+  --gold: #f2b53a;
+  --gold-dark: #c98e12;
+  --focus: #0284c7;
+  color-scheme: light;
+}
+[data-theme="dark"] {
+  --bg: #0a0a0a;
+  --bg2: #111111;
+  --fg: #ededed;
+  --muted: #a1a1a1;
+  --line: #262626;
+  --line2: #3d3d3d;
+  --btn-bg: #ededed;
+  --btn-fg: #0a0a0a;
+  --code-bg: #000000;
+  --code-fg: #ededed;
+  --code-muted: #8f8f8f;
+  --focus: #7cc4f0;
+  color-scheme: dark;
+}
+
+/* ---------- Tema lajur branch ---------- */
+.theme-web    { --lane: #16523a; --lane-ink: #16523a; --lane-tint: #eaf5ef; --lane-solid: #16523a; --lane-on: #fff;    --lane-light: #9be3be; --lane-glow: #22c55e; }
+.theme-python { --lane: #2f7d5b; --lane-ink: #24654a; --lane-tint: #e3f2ea; --lane-solid: #2f7d5b; --lane-on: #fff;    --lane-light: #a7e8c7; --lane-glow: #4ade80; }
+.theme-game   { --lane: #c98e12; --lane-ink: #7a5300; --lane-tint: #fdf1d6; --lane-solid: #f2b53a; --lane-on: #0f3b29; --lane-light: #f2b53a; --lane-glow: #f2b53a; }
+.theme-git    { --lane: #0284c7; --lane-ink: #0369a1; --lane-tint: #e0f2fe; --lane-solid: #0369a1; --lane-on: #fff;    --lane-light: #7cc4f0; --lane-glow: #38bdf8; }
+[data-theme="dark"] .theme-web    { --lane: #3fa877; --lane-ink: #9be3be; --lane-tint: rgba(63, 168, 119, 0.14); --lane-solid: #9be3be; --lane-on: #0a0a0a; }
+[data-theme="dark"] .theme-python { --lane: #4ade80; --lane-ink: #a7e8c7; --lane-tint: rgba(74, 222, 128, 0.12); --lane-solid: #a7e8c7; --lane-on: #0a0a0a; }
+[data-theme="dark"] .theme-game   { --lane: #f2b53a; --lane-ink: #f2c66d; --lane-tint: rgba(242, 181, 58, 0.13); --lane-solid: #f2b53a; --lane-on: #0a0a0a; }
+[data-theme="dark"] .theme-git    { --lane: #38bdf8; --lane-ink: #7cc4f0; --lane-tint: rgba(56, 189, 248, 0.13); --lane-solid: #7cc4f0; --lane-on: #0a0a0a; }
+.lane-text  { color: var(--lane-ink); }
+.lane-light { color: var(--lane-light); }
+.lane-dot   { display: inline-block; width: 0.55rem; height: 0.55rem; border-radius: 999px; background: var(--lane); flex-shrink: 0; }
+
+/* ================= Dasar ================= */
+html { scroll-padding-top: 5rem; background: var(--bg); }
+body { background: var(--bg); color: var(--fg); font-size: 1rem; line-height: 1.6; overflow-x: hidden; transition: background-color 0.2s, color 0.2s; }
+::selection { background: var(--gold); color: #0a0a0a; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+button { cursor: pointer; }
+.muted { color: var(--muted); }
+.mono { font-family: "Geist Mono", ui-monospace, monospace; }
+
+/* ================= Bingkai & sel grid ================= */
+.frame { position: relative; width: 100%; max-width: 1080px; margin-inline: auto; border-inline: 1px solid var(--line); }
+.band { position: relative; border-bottom: 1px solid var(--line); }
+
+/* penanda "+" di sudut bawah setiap band */
+.band > .frame::before, .band > .frame::after {
+  content: "";
+  position: absolute;
+  bottom: -11px;
+  width: 21px;
+  height: 21px;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--fg), var(--fg)) center / 1px 100% no-repeat,
+    linear-gradient(var(--fg), var(--fg)) center / 100% 1px no-repeat;
+  opacity: 0.55;
+}
+.band > .frame::before { left: -11px; }
+.band > .frame::after { right: -11px; }
+@media (max-width: 1100px) { .band > .frame::before, .band > .frame::after { display: none; } }
+
+.cells { display: grid; gap: 1px; background: var(--line); }
+.cells > * { background: var(--bg); min-width: 0; }
+.cells > .cells { background: var(--line); }
+.pad { padding: 2rem 1.25rem; }
+@media (min-width: 768px) { .pad { padding: 3rem; } }
+.pad-lg { padding: 3.5rem 1.25rem; }
+@media (min-width: 768px) { .pad-lg { padding: 5rem 3rem; } }
+
+/* latar titik halus ala kertas grid */
+.dots { background-image: radial-gradient(var(--line2) 1px, transparent 1px); background-size: 20px 20px; }
+
+/* ================= Tipografi ================= */
+.display { font-size: clamp(2.5rem, 6.2vw, 4.6rem); font-weight: 600; line-height: 1.02; letter-spacing: -0.055em; text-wrap: balance; }
+.heading { font-size: clamp(1.75rem, 3.4vw, 2.5rem); font-weight: 600; line-height: 1.1; letter-spacing: -0.045em; text-wrap: balance; }
+.h3 { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.02em; line-height: 1.3; }
+.lead { font-size: 1.125rem; line-height: 1.65; color: var(--muted); max-width: 36rem; text-wrap: pretty; }
+
+/* ================= Tombol ================= */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 999px; font-weight: 500; white-space: nowrap; transition: background-color 0.15s, color 0.15s, box-shadow 0.15s, opacity 0.15s; }
+.btn-primary { background: var(--btn-bg); color: var(--btn-fg); }
+.btn-primary:hover { opacity: 0.85; }
+.btn-ghost { background: var(--bg); color: var(--fg); box-shadow: inset 0 0 0 1px var(--line2); }
+.btn-ghost:hover { background: var(--bg2); }
+.btn-gold { background: var(--gold); color: #0a0a0a; }
+.btn-gold:hover { background: #f7c869; }
+.btn[disabled] { opacity: 0.35; cursor: default; }
+
+.pill-link { display: inline-flex; align-items: center; gap: 0.5rem; border-radius: 999px; padding: 0.3rem 0.4rem 0.3rem 0.9rem; font-size: 0.875rem; color: var(--fg); box-shadow: inset 0 0 0 1px var(--line); background: var(--bg); transition: box-shadow 0.15s; }
+.pill-link:hover { box-shadow: inset 0 0 0 1px var(--line2); }
+.pill-link .arrow { display: inline-flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; border-radius: 999px; background: var(--bg2); }
+
+/* ================= Navigasi ================= */
+.nav-link { border-radius: 999px; padding: 0.4rem 0.8rem; font-size: 0.875rem; color: var(--muted); transition: color 0.15s, background-color 0.15s; }
+.nav-link:hover { color: var(--fg); background: var(--bg2); }
+.nav-link[aria-current="true"] { color: var(--fg); }
+
+/* ================= Tag / chip ================= */
+.tag { display: inline-flex; align-items: center; gap: 0.45rem; border-radius: 999px; padding: 0.25rem 0.7rem; font-size: 0.8rem; font-weight: 500; background: var(--lane-tint); color: var(--lane-ink); }
+.tag-plain { display: inline-flex; align-items: center; border-radius: 999px; padding: 0.25rem 0.7rem; font-size: 0.8rem; color: var(--fg); box-shadow: inset 0 0 0 1px var(--line); }
+.chip { font-family: "Geist Mono", monospace; font-size: 0.8rem; border-radius: 999px; padding: 0.3rem 0.8rem; color: var(--fg); box-shadow: inset 0 0 0 1px var(--line); background: var(--bg); transition: box-shadow 0.15s, background-color 0.15s; }
+.chip:hover { box-shadow: inset 0 0 0 1px var(--line2); background: var(--bg2); }
+.chip::before { content: "$ "; color: var(--muted); }
+
+/* ================= Hero: grafik branch ================= */
+.hero-glow { position: absolute; inset: 0; pointer-events: none; opacity: 0.5;
+  background:
+    radial-gradient(40% 60% at 20% 70%, rgba(34, 197, 94, 0.18), transparent 70%),
+    radial-gradient(35% 55% at 50% 85%, rgba(242, 181, 58, 0.2), transparent 70%),
+    radial-gradient(40% 60% at 80% 70%, rgba(56, 189, 248, 0.2), transparent 70%);
+}
+.branch-cell { position: relative; display: flex; flex-direction: column; gap: 0.35rem; padding: 1.25rem; text-align: left; transition: background-color 0.15s; }
+.branch-cell:hover { background: var(--bg2); }
+.branch-cell::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--lane); transform: scaleX(0); transform-origin: left; transition: transform 0.25s ease; }
+.branch-cell:hover::after { transform: scaleX(1); }
+
+/* ================= Terminal ================= */
+.terminal { background: var(--code-bg); color: var(--code-fg); }
+.term-log { height: 15rem; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #333 transparent; }
+@media (min-width: 640px) { .term-log { height: 16.5rem; } }
+.term-input { outline: none; caret-color: var(--gold); }
+.term-input:focus-visible { outline: none; }
+.terminal:focus-within { box-shadow: inset 0 0 0 1px var(--focus); }
+.t-line { display: block; white-space: pre-wrap; overflow-wrap: anywhere; padding-left: 1.2em; text-indent: -1.2em; }
+.t-prompt { color: var(--gold); }
+.t-out { color: var(--code-muted); }
+.t-ok { color: var(--gold); }
+.t-err { color: #ff8a80; }
+.t-head { color: var(--code-fg); }
+.t-link { color: var(--gold); text-decoration: underline; text-underline-offset: 3px; }
+.t-caret { display: inline-block; width: 0.55em; height: 1.05em; margin-left: 2px; vertical-align: -0.17em; background: var(--gold); animation: caret 1s steps(1) infinite; }
+@keyframes caret { 50% { opacity: 0; } }
+
+/* ================= git log ================= */
+.log-list { display: flex; gap: 0.5rem; overflow-x: auto; scrollbar-width: none; }
+.log-list::-webkit-scrollbar { display: none; }
+.log-tab { flex-shrink: 0; display: flex; align-items: center; gap: 0.6rem; border-radius: 999px; padding: 0.45rem 0.9rem; box-shadow: inset 0 0 0 1px var(--line); text-align: left; transition: background-color 0.15s, color 0.15s; }
+.log-tab .node { width: 0.75rem; height: 0.75rem; border-radius: 999px; border: 2px solid var(--fg); background: var(--bg); flex-shrink: 0; }
+.log-tab .node--branch { border-color: transparent; background: conic-gradient(#22c55e 0 25%, #2f7d5b 0 50%, #f2b53a 0 75%, #38bdf8 0); }
+.log-tab .node--merge { border-color: var(--gold-dark); background: var(--gold); }
+.log-tab .hash { font-family: "Geist Mono", monospace; font-size: 0.75rem; color: var(--muted); }
+.log-tab .title { font-weight: 500; white-space: nowrap; }
+.log-tab[aria-selected="true"] { background: var(--btn-bg); color: var(--btn-fg); box-shadow: none; }
+.log-tab[aria-selected="true"] .hash { color: inherit; opacity: 0.7; }
+@media (min-width: 1024px) {
+  .log-list { display: block; overflow: visible; }
+  .log-tab { position: relative; width: 100%; border-radius: 0.6rem; padding: 0.85rem 1rem 0.85rem 3rem; box-shadow: none; }
+  .log-tab:hover { background: var(--bg2); }
+  .log-tab::before { content: ""; position: absolute; left: calc(1.4rem - 0.5px); top: 0; bottom: 0; width: 1px; background: var(--line2); }
+  .log-tab:first-child::before { top: 50%; }
+  .log-tab:last-child::before { bottom: 50%; }
+  .log-tab .node { position: absolute; left: 1.4rem; top: 50%; transform: translate(-50%, -50%); width: 0.9rem; height: 0.9rem; }
+  .log-tab[aria-selected="true"] { background: var(--bg2); color: var(--fg); }
+  .log-tab[aria-selected="true"] .hash { color: var(--muted); opacity: 1; }
+  .log-tab[aria-selected="true"] .node { box-shadow: 0 0 0 4px var(--line); }
+}
+
+/* ================= Tab bergaris bawah ================= */
+.utabs { display: flex; gap: 0.25rem; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid var(--line); }
+.utabs::-webkit-scrollbar { display: none; }
+.utab { position: relative; display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.9rem 0.9rem; font-size: 0.875rem; color: var(--muted); white-space: nowrap; transition: color 0.15s; }
+.utab:hover { color: var(--fg); }
+.utab::after { content: ""; position: absolute; left: 0.5rem; right: 0.5rem; bottom: -1px; height: 2px; background: transparent; }
+.utab[aria-selected="true"] { color: var(--fg); }
+.utab[aria-selected="true"]::after { background: var(--lane, var(--fg)); }
+
+/* ================= Editor kode ================= */
+.editor { background: var(--code-bg); color: var(--code-fg); border-radius: 0.75rem; overflow: hidden; box-shadow: 0 0 0 1px var(--line), inset 0 2px 0 var(--lane); }
+.code { counter-reset: ln; list-style: none; margin: 0; padding: 1.1rem 0; font-family: "Geist Mono", monospace; font-size: 0.82rem; line-height: 1.75; overflow-x: auto; }
+.code li { counter-increment: ln; white-space: pre; padding-right: 1.25rem; }
+.code li::before { content: counter(ln); display: inline-block; width: 3rem; padding-right: 1rem; text-align: right; color: #4d4d4d; user-select: none; }
+.run-out { border-top: 1px solid #222; padding: 1rem 1.25rem; font-family: "Geist Mono", monospace; font-size: 0.82rem; min-height: 4.5rem; }
+.stage { position: relative; height: 3rem; border: 1px dashed #444; margin-top: 0.5rem; }
+.stage-hero { position: absolute; top: 50%; width: 1.25rem; height: 1.25rem; background: var(--gold); box-shadow: inset -4px -4px 0 #c98e12; transform: translate(-50%, -50%); transition: left 0.12s steps(3); }
+.btn-code { display: inline-flex; align-items: center; gap: 0.4rem; height: 2rem; padding: 0 0.8rem; border-radius: 999px; font-size: 0.8rem; color: #ededed; box-shadow: inset 0 0 0 1px #333; }
+.btn-code:hover { background: #1a1a1a; }
+.keahlian-glow { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(60% 80% at 100% 0%, var(--lane-tint), transparent 70%); transition: background 0.3s; }
+
+/* ================= Kuis ================= */
+.quiz-bar { height: 2px; background: var(--line); overflow: hidden; }
+.quiz-bar > span { display: block; height: 100%; background: var(--fg); transition: width 0.3s ease; }
+.quiz-opt { display: flex; align-items: center; gap: 0.9rem; width: 100%; text-align: left; padding: 1rem 1.1rem; font-weight: 500; background: var(--bg); transition: background-color 0.15s; }
+.quiz-opt:hover { background: var(--lane-tint); }
+.quiz-opt .key { display: inline-flex; align-items: center; justify-content: center; width: 1.75rem; height: 1.75rem; flex-shrink: 0; border-radius: 0.4rem; box-shadow: inset 0 0 0 1px var(--line2); font-family: "Geist Mono", monospace; font-size: 0.75rem; color: var(--muted); transition: background-color 0.15s, color 0.15s, box-shadow 0.15s; }
+.quiz-opt:hover .key { background: var(--lane-solid); color: var(--lane-on); box-shadow: none; }
+.quiz-result { border-radius: 0.75rem; background: var(--lane-tint); padding: 1.5rem; box-shadow: inset 2px 0 0 var(--lane); }
+
+/* ================= Berita: scroll horizontal ================= */
+.news-wrap { position: relative; }
+/* bayangan pudar di tepi yang masih bisa digeser */
+.news-wrap::before, .news-wrap::after { content: ""; position: absolute; top: 0; bottom: 3px; width: 3rem; z-index: 2; pointer-events: none; transition: opacity 0.3s ease; }
+.news-wrap::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
+.news-wrap::after { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+.news-wrap.at-start::before, .news-wrap.at-end::after { opacity: 0; }
+
+.news-track { display: flex; gap: 1rem; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: 1.25rem; padding: 1.5rem 1.25rem 1.75rem; scrollbar-width: none; cursor: grab; }
+.news-track::-webkit-scrollbar { display: none; }
+@media (min-width: 768px) { .news-track { padding-inline: 3rem; scroll-padding-inline: 3rem; } }
+.news-track.dragging { cursor: grabbing; scroll-snap-type: none; user-select: none; }
+.news-track.dragging a { pointer-events: none; }
+
+.news-card { flex: 0 0 min(82%, 320px); scroll-snap-align: start; display: flex; flex-direction: column; overflow: hidden; border-radius: 0.9rem; background: var(--bg); box-shadow: 0 0 0 1px var(--line); transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease); }
+.news-card:hover { transform: translateY(-3px); box-shadow: 0 0 0 1px var(--line2), 0 12px 32px rgba(0, 0, 0, 0.08); }
+.news-cover { position: relative; height: 9.5rem; overflow: hidden; background: radial-gradient(120% 90% at 0% 0%, var(--lane-tint), transparent 60%), var(--bg2); }
+.news-cover::before { content: ""; position: absolute; inset: 0; background-image: radial-gradient(var(--line2) 1px, transparent 1px); background-size: 16px 16px; opacity: 0.7; }
+.news-cover img { position: relative; width: 100%; height: 100%; object-fit: cover; }
+.news-cover .ico { position: absolute; right: 1.25rem; bottom: 1.1rem; display: inline-flex; align-items: center; justify-content: center; width: 3.25rem; height: 3.25rem; border-radius: 0.9rem; background: var(--bg); color: var(--lane-ink); box-shadow: 0 0 0 1px var(--line); transition: transform 0.4s var(--ease); }
+.news-card:hover .news-cover .ico { transform: translateY(-4px) rotate(-6deg); }
+
+/* kartu unggulan (game) bergaya pixel-art */
+.news-card--game { flex-basis: min(90%, 540px); background: #07170f; color: #fff; box-shadow: 0 0 0 1px #1f2b25; }
+.news-card--game:hover { box-shadow: 0 0 0 1px var(--gold), 0 12px 32px rgba(0, 0, 0, 0.25); }
+.news-card--game .news-cover { height: 11rem; background: radial-gradient(90% 120% at 100% 0%, rgba(242, 181, 58, 0.22), transparent 60%), #0a2c1e; }
+.news-card--game .news-cover::before { background-image: linear-gradient(45deg, rgba(255,255,255,.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.05) 75%), linear-gradient(45deg, rgba(255,255,255,.05) 25%, transparent 25%, transparent 75%, rgba(255,255,255,.05) 75%); background-size: 16px 16px; background-position: 0 0, 8px 8px; opacity: 1; }
+.pixel-title { line-height: 1.6; text-shadow: 3px 3px 0 #000; }
+.pixel-sprite { position: absolute; right: 1.5rem; bottom: 1.25rem; image-rendering: pixelated; transition: transform 0.4s var(--ease); }
+.news-card--game:hover .pixel-sprite { transform: translateY(-6px); }
+
+.news-progress { height: 2px; margin: 0 1.25rem 1.25rem; background: var(--line); border-radius: 2px; overflow: hidden; }
+@media (min-width: 768px) { .news-progress { margin-inline: 3rem; } }
+.news-progress > span { display: block; height: 100%; width: 0; background: var(--fg); border-radius: 2px; transition: width 0.15s linear; }
+
+/* ================= Filter & karya ================= */
+.segmented { display: inline-flex; flex-wrap: wrap; gap: 0.25rem; padding: 0.25rem; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); }
+.segmented button { border-radius: 999px; padding: 0.35rem 0.9rem; font-size: 0.85rem; color: var(--muted); transition: background-color 0.15s, color 0.15s; }
+.segmented button:hover { color: var(--fg); }
+.segmented button[aria-pressed="true"] { background: var(--bg2); color: var(--fg); box-shadow: inset 0 0 0 1px var(--line2); }
+.project-cell { display: flex; flex-direction: column; transition: background-color 0.15s; }
+.project-cell:hover { background: var(--bg2); }
+.project-cell.is-hidden { display: none; }
+
+/* ================= Stepper PKL ================= */
+.step-cell { position: relative; display: flex; flex-direction: column; gap: 0.5rem; text-align: left; padding: 1.5rem 1.25rem; transition: background-color 0.15s; }
+.step-cell:hover { background: var(--bg2); }
+.step-cell .num { font-family: "Geist Mono", monospace; font-size: 0.8rem; color: var(--muted); }
+.step-cell .bar { position: absolute; left: 0; right: 0; top: 0; height: 2px; background: transparent; transition: background-color 0.2s; }
+.step-cell[data-done="true"] .bar { background: var(--line2); }
+.step-cell[aria-selected="true"] { background: var(--bg2); }
+.step-cell[aria-selected="true"] .bar { background: var(--fg); }
+.step-cell[aria-selected="true"] .num { color: var(--fg); }
+
+/* ================= Karir ================= */
+.career-cell { position: relative; }
+.career-cell::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--lane); }
+
+/* ================= FAQ ================= */
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.25s ease; }
+.faq-panel > div { overflow: hidden; }
+.faq-item[data-open="true"] .faq-panel { grid-template-rows: 1fr; }
+.faq-icon { transition: transform 0.25s ease; }
+.faq-item[data-open="true"] .faq-icon { transform: rotate(45deg); }
+
+/* ================= Pengalih tema ================= */
+.theme-switch { display: inline-flex; gap: 2px; padding: 3px; border-radius: 999px; box-shadow: inset 0 0 0 1px var(--line); }
+.theme-switch button { display: inline-flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; border-radius: 999px; color: var(--muted); }
+.theme-switch button:hover { color: var(--fg); }
+.theme-switch button[aria-pressed="true"] { background: var(--bg2); color: var(--fg); box-shadow: inset 0 0 0 1px var(--line2); }
+
+.swap-in { animation: swapIn 0.35s var(--ease) both; }
+@keyframes swapIn { from { opacity: 0; transform: translateY(6px); filter: blur(3px); } to { opacity: 1; transform: none; filter: none; } }
+body.drawer-open { overflow: hidden; }
+
+/* =====================================================================
+ * ANIMASI
+ * Semua animasi hanya aktif bila JS berjalan (kelas .js di <html>)
+ * dan dimatikan untuk pengguna dengan prefers-reduced-motion.
+ * ===================================================================== */
+:root { --ease: cubic-bezier(0.22, 1, 0.36, 1); }
+
+/* ---------- 1. Hero saat halaman dibuka ---------- */
+.js .hero-in > * { animation: rise 0.9s var(--ease) both; }
+.js .hero-in > :nth-child(1) { animation-delay: 0.05s; }
+.js .hero-in > :nth-child(2) { animation: none; }            /* headline dianimasikan per kata */
+.js .hero-in > :nth-child(3) { animation-delay: 0.55s; }
+.js .hero-in > :nth-child(4) { animation-delay: 0.7s; }
+.js .hero-in > :nth-child(5) { animation-delay: 0.85s; }
+.word { display: inline-block; }
+.js .word { animation: wordIn 0.9s var(--ease) both; animation-delay: calc(0.12s + var(--i) * 0.055s); }
+@keyframes rise { from { opacity: 0; transform: translateY(14px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes wordIn { from { opacity: 0; transform: translateY(0.35em); filter: blur(8px); } to { opacity: 1; transform: none; filter: none; } }
+
+/* cahaya hero bergeser sangat pelan */
+.js .hero-glow { animation: drift 18s ease-in-out infinite alternate; }
+@keyframes drift { from { transform: translate3d(-3%, 0, 0) scale(1); } to { transform: translate3d(3%, -4%, 0) scale(1.06); } }
+
+/* ---------- 2. Grafik branch tergambar ---------- */
+.js .graph .draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.js .graph .pop { opacity: 0; transform: scale(0.2); transform-box: fill-box; transform-origin: center; }
+.js .graph .fade { opacity: 0; }
+.js .graph.in .draw { stroke-dashoffset: 0; transition: stroke-dashoffset 1.3s var(--ease); transition-delay: var(--d, 0s); }
+.js .graph.in .pop { opacity: 1; transform: none; transition: opacity 0.4s var(--ease), transform 0.5s var(--ease); transition-delay: var(--d, 0s); }
+.js .graph.in .fade { opacity: 1; transition: opacity 0.6s ease; transition-delay: var(--d, 0s); }
+.merge-pulse { transform-box: fill-box; transform-origin: center; opacity: 0; }
+.js .graph.in .merge-pulse { animation: pulse 2.4s ease-out 2.2s infinite; }
+@keyframes pulse { 0% { opacity: 0.55; transform: scale(1); } 100% { opacity: 0; transform: scale(2.6); } }
+
+/* ---------- 3. Muncul saat di-scroll ---------- */
+.js .reveal { opacity: 0; transform: translateY(16px); filter: blur(4px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease), filter 0.8s var(--ease); transition-delay: var(--d, 0ms); }
+.js .reveal.in { opacity: 1; transform: none; filter: none; }
+
+/* ---------- 4. Indikator meluncur ---------- */
+.utabs { position: relative; }
+.utab[aria-selected="true"]::after { background: transparent; }
+.utab-ind { position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: var(--lane, var(--fg)); border-radius: 2px; pointer-events: none;
+  transition: transform 0.45s var(--ease), width 0.45s var(--ease), background-color 0.35s ease; }
+.segmented { position: relative; }
+.segmented button { position: relative; z-index: 1; }
+.segmented button[aria-pressed="true"] { background: transparent; box-shadow: none; }
+.seg-ind { position: absolute; left: 0; top: 0; border-radius: 999px; background: var(--bg2); box-shadow: inset 0 0 0 1px var(--line2); pointer-events: none;
+  transition: transform 0.45s var(--ease), width 0.45s var(--ease), height 0.45s var(--ease); }
+.utabs .utab-ind:not([style]), .segmented .seg-ind:not([style]) { opacity: 0; }
+.keahlian-glow, .editor { transition: background 0.4s ease, box-shadow 0.4s ease; }
+
+/* ---------- 5. Respons klik ---------- */
+.btn { transition: background-color 0.15s, color 0.15s, box-shadow 0.15s, opacity 0.15s, transform 0.15s var(--ease); }
+.btn:active:not([disabled]) { transform: scale(0.97); }
+.pill-link .arrow { transition: transform 0.3s var(--ease); }
+.pill-link:hover .arrow { transform: translate(2px, -2px); }
+.branch-cell .lane-dot { transition: transform 0.3s var(--ease); }
+.branch-cell:hover .lane-dot { transform: scale(1.6); }
+.log-tab .node { transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease); }
+.quiz-opt.picked { background: var(--lane-tint); }
+.quiz-opt.picked .key { background: var(--lane-solid); color: var(--lane-on); box-shadow: none; transform: scale(1.1); }
+.quiz-opt .key { transition: background-color 0.15s, color 0.15s, box-shadow 0.15s, transform 0.25s var(--ease); }
+.project-cell.pop-in { animation: rise 0.5s var(--ease) both; }
+header.scrolled { box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06); }
+header { transition: box-shadow 0.3s ease; }
+
+/* ---------- 6. Pergantian tema yang halus ---------- */
+html.theme-fade *, html.theme-fade *::before, html.theme-fade *::after {
+  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease, fill 0.35s ease, stroke 0.35s ease !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .t-caret, .swap-in, .js .word, .js .hero-in > *, .js .hero-glow, .js .graph.in .merge-pulse, .project-cell.pop-in { animation: none !important; }
+  .news-track { scroll-behavior: auto; }
+  .js .reveal, .js .graph .draw, .js .graph .pop, .js .graph .fade { opacity: 1; transform: none; filter: none; stroke-dashoffset: 0; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+
+/* tautan di kartu berita */
+.news-link { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.875rem; font-weight: 500; color: var(--fg); text-underline-offset: 4px; }
+.news-link:hover { text-decoration: underline; }
+.news-link svg { transition: transform 0.3s var(--ease); }
+.news-link:hover svg { transform: translate(2px, -2px); }
+
+/* kartu berita lebar bergambar (mis. GIT QUEST) */
+.news-card--wide { flex-basis: min(90%, 540px); }
+.news-card--wide .news-cover { height: auto; aspect-ratio: 840 / 471; }
+.news-card--wide .news-cover::before { display: none; }
+.news-cover img { transition: transform 0.6s var(--ease); }
+.news-card:hover .news-cover img { transform: scale(1.03); }
