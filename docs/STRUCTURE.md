@@ -27,10 +27,11 @@ web-rpl-tamsis/
 ├── css/                         <-- Custom styling tambahan di luar Tailwind
 │   └── style.css                <-- Animasi halus, custom scrollbar, font variables
 │
-├── git_guest/                   <-- GIT QUEST: game RPG edukatif Git (repo terpisah, web statis, bisa offline)
-│   ├── index.html               <-- Ditautkan dari website: ./git_guest/index.html
-│   ├── assets/images/cover-gitquest.webp  <-- Sampul, dipakai di kartu berita
-│   └── README.md                <-- Cara menjalankan & batasan (belum optimal di HP)
+├── pages/media/gameinteraktif/
+│   └── git_guest/               <-- GIT QUEST: game RPG edukatif Git (repo terpisah, web statis, bisa offline)
+│       ├── index.html           <-- Ditautkan dari website: ./pages/media/gameinteraktif/git_guest/index.html
+│       ├── assets/images/cover-gitquest.webp  <-- Sampul, dipakai di kartu berita
+│       └── README.md            <-- Cara menjalankan & batasan (belum optimal di HP)
 │
 ├── .cursorrules                 <-- Aturan otomatis untuk AI editor (Cursor/Windsurf)
 └── index.html                   <-- Halaman utama portal Jurusan RPL / PPLG

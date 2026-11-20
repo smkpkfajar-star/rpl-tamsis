@@ -13,8 +13,8 @@ const SITE_DATA = {
     whatsappNumber: '628xxxxxxxxxx',
     mainPortal: 'https://tamsis.site/',
     gameUrl: 'https://rpl.tamsis.site/',
-    // GIT QUEST ada di folder git_guest/ di dalam website ini (aplikasi web statis, bisa offline)
-    gitQuestUrl: './git_guest/index.html',
+    // GIT QUEST ada di folder pages/media/gameinteraktif/git_guest/ di dalam website ini (aplikasi web statis, bisa offline)
+    gitQuestUrl: './pages/media/gameinteraktif/git_guest/index.html',
     // TODO: lengkapi nama jalan & nomor sesuai alamat resmi sekolah
     address: 'SMK Tamansiswa Jetis, Kecamatan Jetis, Kota Yogyakarta, Daerah Istimewa Yogyakarta',
   },
@@ -139,7 +139,7 @@ const SITE_DATA = {
     {
       key: "git",
       branch: "feature/git",
-      practice: { label: "Latihan di GIT QUEST", url: "./git_guest/index.html" },
+      practice: { label: "Latihan di GIT QUEST", url: "./pages/media/gameinteraktif/git_guest/index.html" },
       title: "Git, GitHub & Kolaborasi Tim",
       description: "Simulasi alur kerja developer profesional menggunakan version control, branching, serta persiapan Uji Kompetensi Keahlian (UKK).",
       tools: "Git, GitHub, branching, UKK",
@@ -227,9 +227,9 @@ const SITE_DATA = {
       category: 'Game edukasi',
       title: 'GIT QUEST: belajar Git lewat petualangan RPG',
       summary: 'Jelajahi dunia ala RPG, baca materi dari NPC, lalu kalahkan monster bug lewat kuis, simulasi terminal, dan simulator commit. 7 stage untuk siswa kelas XI RPL, bisa dimainkan tanpa internet.',
-      image: './git_guest/assets/images/cover-gitquest.webp',
+      image: './pages/media/gameinteraktif/git_guest/assets/images/cover-gitquest.webp',
       imageAlt: 'Sampul GIT QUEST: The Repository Chronicles, game edukatif Git untuk SMK RPL, dengan 10 karakter pixel-art',
-      url: './git_guest/index.html',
+      url: './pages/media/gameinteraktif/git_guest/index.html',
       cta: 'Mainkan GIT QUEST',
       note: 'Paling nyaman dimainkan di komputer atau laptop.',
       theme: 'git',
@@ -283,7 +283,7 @@ const SITE_DATA = {
       category: 'Game Edukasi',
       theme: 'game',
       description: 'Game RPG edukatif untuk belajar dasar Git: version control, tiga area Git, perintah CLI, commit, dan .gitignore. 7 stage, 10 karakter, bisa dimainkan offline.',
-      url: './git_guest/index.html',
+      url: './pages/media/gameinteraktif/git_guest/index.html',
     },
     {
       title: 'GITHUB: TEAM COLLAPSE',

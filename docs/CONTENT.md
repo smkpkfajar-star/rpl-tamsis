@@ -56,7 +56,7 @@ Naskah resmi website. Semua teks di sini sudah dimasukkan ke `js/data.js` (kecua
   - `feature/python`: `Kamu menguasai 3 materi`
   - `feature/game`: arena kecil, hero pixel digerakkan dengan tombol ◀ ▶ atau panah keyboard (`hero.x = n`)
   - `feature/git`: keluaran `git push` dan `Siap dibuatkan Pull Request untuk direview tim.`
-- **Tautan latihan:** panel `feature/git` punya tombol `Latihan di GIT QUEST` → `./git_guest/index.html`.
+- **Tautan latihan:** panel `feature/git` punya tombol `Latihan di GIT QUEST` → `./pages/media/gameinteraktif/git_guest/index.html`.
 
 | Branch | Bidang | Deskripsi | Alat & materi |
 |---|---|---|---|
@@ -99,7 +99,7 @@ Naskah resmi website. Semua teks di sini sudah dimasukkan ke `js/data.js` (kecua
 
 | Kategori | Judul | Ringkasan | Tautan |
 |---|---|---|---|
-| Game edukasi *(kartu lebar, gambar sampul `git_guest/assets/images/cover-gitquest.webp`)* | GIT QUEST: belajar Git lewat petualangan RPG | Jelajahi dunia ala RPG, baca materi dari NPC, lalu kalahkan monster bug lewat kuis, simulasi terminal, dan simulator commit. 7 stage untuk siswa kelas XI RPL, bisa dimainkan tanpa internet. Catatan: `Paling nyaman dimainkan di komputer atau laptop.` | `Mainkan GIT QUEST` → `./git_guest/index.html` |
+| Game edukasi *(kartu lebar, gambar sampul `pages/media/gameinteraktif/git_guest/assets/images/cover-gitquest.webp`)* | GIT QUEST: belajar Git lewat petualangan RPG | Jelajahi dunia ala RPG, baca materi dari NPC, lalu kalahkan monster bug lewat kuis, simulasi terminal, dan simulator commit. 7 stage untuk siswa kelas XI RPL, bisa dimainkan tanpa internet. Catatan: `Paling nyaman dimainkan di komputer atau laptop.` | `Mainkan GIT QUEST` → `./pages/media/gameinteraktif/git_guest/index.html` |
 | Karya siswa *(kartu unggulan, pixel-art)* | GITHUB: TEAM COLLAPSE bisa dimainkan langsung di browser | Gim edukasi berbasis web bergaya JRPG/Simulasi untuk melatih kolaborasi tim menggunakan Git branching dan penyelesaian merge conflict. | `Mainkan sekarang` → `https://rpl.tamsis.site/` |
 | Aplikasi web | Portal SPMB Online SMK Tamansiswa Jetis | Sistem pendaftaran peserta didik baru terintegrasi verifikasi berkas digital, dikembangkan di lingkungan RPL. | — |
 | Aplikasi web | Generator Laporan PKL bantu siswa menyusun laporan | Aplikasi web internal untuk membantu siswa menyusun dokumen laporan Praktik Kerja Lapangan secara terstruktur. | — |
@@ -114,7 +114,7 @@ Naskah resmi website. Semua teks di sini sudah dimasukkan ke `js/data.js` (kecua
 
 | Kategori | Judul | Deskripsi | Aksi |
 |---|---|---|---|
-| Game Edukasi | GIT QUEST — The Repository Chronicles | Game RPG edukatif untuk belajar dasar Git: version control, tiga area Git, perintah CLI, commit, dan .gitignore. 7 stage, 10 karakter, bisa dimainkan offline. | `Buka karya` → `./git_guest/index.html` |
+| Game Edukasi | GIT QUEST — The Repository Chronicles | Game RPG edukatif untuk belajar dasar Git: version control, tiga area Git, perintah CLI, commit, dan .gitignore. 7 stage, 10 karakter, bisa dimainkan offline. | `Buka karya` → `./pages/media/gameinteraktif/git_guest/index.html` |
 | Game Edukasi | GITHUB: TEAM COLLAPSE | Gim edukasi bergaya JRPG/Simulasi untuk berlatih Git branching dan menyelesaikan merge conflict bersama tim. | `Buka karya` → `https://rpl.tamsis.site/` |
 | Aplikasi Web | Portal SPMB Online SMK Tamansiswa Jetis | Sistem pendaftaran peserta didik baru terintegrasi verifikasi berkas digital. | `Dipakai internal sekolah` *(isi URL jika sudah publik)* |
 | Aplikasi Web | Sistem Generator Laporan PKL Otomatis | Aplikasi web internal untuk membantu siswa menyusun dokumen laporan Praktik Kerja Lapangan secara terstruktur. | `Dipakai internal sekolah` |
